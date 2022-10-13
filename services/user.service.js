@@ -1,17 +1,21 @@
 
 
-const getConnection = require('../libs/postgres');
+const poolUserService= require('../libs/postgres');
+const {models} = require ('../libs/sequelize');
 
 class UserService {
-  constructor() {}
+  constructor() {
+    this.poolUserService=poolUserService;
+    this.poolUserService.on('error', (err) => console.log(err));
+  }
 
   async create(data) {
     return data;
   }
 
   async find() {
-    const client = await getConnection();
-    const rta = await client.query('SELECT * FROM tasks');
+    const query = 'SELECT * FROM tasks'
+    const rta = await this.poolUserService.query(query);
     return rta.rows;
   }
 

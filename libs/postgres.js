@@ -1,6 +1,6 @@
-const {Client,} = require ('pg');
- async function getConnection ( ) {
-  const client = new Client ({
+const {Pool,} = require ('pg');
+
+  const poolUserService = new Pool ({
     host:'localhost',
     port:5432,
     user:'nico',
@@ -8,9 +8,5 @@ const {Client,} = require ('pg');
     database:'my_store',
   });
 
-  await client.connect();
-  return client;
-
-}
-module.exports = getConnection;
+module.exports = poolUserService;
 
